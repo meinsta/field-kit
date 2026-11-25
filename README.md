@@ -11,7 +11,7 @@ pip install git+https://github.com/meinsta/field-kit
 python3 test_fieldkit.py        # offline, no cluster, no keys
 ```
 
-Kits built on it: [grounding-layer](https://github.com/meinsta/grounding-layer).
+Kits built on it: [grounding-layer](https://github.com/meinsta/grounding-layer), [org-knowledge-mcp](https://github.com/meinsta/org-knowledge-mcp).
 
 ## The contract
 
@@ -30,7 +30,7 @@ A model writes claims. Code decides whether they ship.
 |---|---|---|
 | [`qdrant`](fieldkit/qdrant.py) | Hybrid search over REST: dense + BM25 fused with RRF, score boosts, grouping, recommendation, scroll. Cloud Inference embeds server-side. | Cluster |
 | [`dag`](fieldkit/dag.py) | Run plain functions as a DAG. Content-hash resume, parallel siblings, per-kind timing. | Nothing |
-| [`gate`](fieldkit/gate.py) | Reject any claim whose `source_id` is missing from the evidence. Repairs a mistyped id only when the evidence proves it. | Nothing |
+| [`gate`](fieldkit/gate.py) | Reject any claim whose `source_id` is missing from the evidence. Repairs a mistyped id only when the evidence proves it. `quote_gate` then requires the claim's quote verbatim in that source. | Nothing |
 | [`memory`](fieldkit/memory.py) | Store judged outcomes in Qdrant and return the nearest failures, successes and lessons as a prompt block. | Cluster |
 | [`recall`](fieldkit/recall.py) | Reach and per-question hit rate against a frozen golden set, with the ceiling first: how many targets are in the index at all. | Nothing |
 | [`preflight`](fieldkit/preflight.py) | Probe every dependency before a run. Blocking failures halt; advisory ones degrade honestly. | Nothing |

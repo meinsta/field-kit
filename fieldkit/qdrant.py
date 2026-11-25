@@ -124,6 +124,11 @@ def scroll(name, flt=None, page=1000, with_payload=True):
             return
 
 
+def get(name, ids):
+    """Points by id, with payload. Ids that are not in the collection are simply absent."""
+    return _req("POST", f"/collections/{name}/points", {"ids": list(ids), "with_payload": True})["result"] if ids else []
+
+
 def delete(name, ids, batch=512):
     for i in range(0, len(ids), batch):
         _req("POST", f"/collections/{name}/points/delete?wait=true", {"points": ids[i:i + batch]})

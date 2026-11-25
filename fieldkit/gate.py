@@ -51,6 +51,21 @@ def crossref_gate(claims, evidence, hard=True):
     return accepted, rejected
 
 
+def quote_gate(claims, evidence, min_words=4):
+    """Run after crossref_gate. An id proves the source exists, not that it says this: the cited
+    source must hold the claim's quote verbatim (case and punctuation aside). Returns (accepted, rejected)."""
+    accepted, rejected = [], []
+    for c in claims:
+        q = _norm(c.get("quote"))
+        if len(q.split()) < min_words:
+            rejected.append((c, f"quote shorter than {min_words} words"))
+        elif q not in _norm(evidence.get(c.get("source_id"))):
+            rejected.append((c, f"quote is not in source '{c.get('source_id')}'"))
+        else:
+            accepted.append(c)
+    return accepted, rejected
+
+
 def confidence_guard(claims):
     """Range-check confidence in [0, 1]. Constrained decoding strips numeric bounds from a schema."""
     bad = [c for c in claims if not 0.0 <= c["confidence"] <= 1.0]

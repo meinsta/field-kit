@@ -42,6 +42,11 @@ def test_gate():
         {"text": "wrong prefix, no proof", "source_id": "IN-acme-58"},
         {"text": "invented", "source_id": "TX-nope-1"}], ev, hard=False)
     assert [c["source_id"] for c in ok] == ["TX-acme-58", "CM-9f3a11c2d4", "TX-acme-58"] and len(bad) == 2
+    ok, bad = gate.quote_gate([
+        {"text": "keys rotate quarterly", "source_id": "TX-acme-58", "quote": "We rotate keys every ninety days"},
+        {"text": "keys rotate weekly", "source_id": "TX-acme-58", "quote": "we rotate keys every seven days"},
+        {"text": "no quote", "source_id": "TX-acme-58"}], ev)
+    assert [c["text"] for c in ok] == ["keys rotate quarterly"] and len(bad) == 2
     try:
         gate.crossref_gate([{"text": "invented", "source_id": "zz"}], ev); assert False
     except gate.CrossrefError:
