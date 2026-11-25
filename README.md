@@ -11,7 +11,15 @@ pip install git+https://github.com/meinsta/field-kit
 python3 test_fieldkit.py        # offline, no cluster, no keys
 ```
 
-Kits built on it: [grounding-layer](https://github.com/meinsta/grounding-layer), [org-knowledge-mcp](https://github.com/meinsta/org-knowledge-mcp).
+Kits built on it, each matching a system on [meina.me](https://meina.me):
+
+| Kit | What it does |
+|---|---|
+| [grounding-layer](https://github.com/meinsta/grounding-layer) | Scheduled refresh of product and field sources, ending in a recall gate |
+| [org-knowledge-mcp](https://github.com/meinsta/org-knowledge-mcp) | An MCP server that answers from your sources and checks every claim is cited |
+| [field-systems](https://github.com/meinsta/field-systems) | Field cards with a weekly keep-current check and review queue |
+| [field-guides](https://github.com/meinsta/field-guides) | Deal-backed guide outlines with expert review |
+| [page-engine](https://github.com/meinsta/page-engine) | Product pages and paid landings where authored words are judged in code |
 
 ## The contract
 
