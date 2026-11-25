@@ -75,6 +75,9 @@ def test_recall_ceiling():
                      fetch=lambda q: ["alpha FACT"] if q == "q1" else ["noise"], corpus=["Alpha fact", "beta fact", "noise"])
     assert (r["target"], r["reachable"], r["reached"]) == (3, 2, 1)
     assert r["not_in_index"] == ["gamma fact"] and r["missed"] == ["beta fact"]
+    gold = [{"q": "q1", "target": ["Alpha fact"]}, {"q": "q2", "target": ["Beta fact"]}]
+    h = recall.hit_rate(gold, lambda q: ["alpha fact", "beta fact"] if q == "q1" else ["noise"], corpus=["alpha fact"])
+    assert (h["hits"], h["missed"], h["not_in_index"]) == (1, ["q2"], ["beta fact"])     # q2 cannot borrow q1's hit
 
 
 def test_approvals_and_bridge():

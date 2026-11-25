@@ -32,7 +32,7 @@ A model writes claims. Code decides whether they ship.
 | [`dag`](fieldkit/dag.py) | Run plain functions as a DAG. Content-hash resume, parallel siblings, per-kind timing. | Nothing |
 | [`gate`](fieldkit/gate.py) | Reject any claim whose `source_id` is missing from the evidence. Repairs a mistyped id only when the evidence proves it. | Nothing |
 | [`memory`](fieldkit/memory.py) | Store judged outcomes in Qdrant and return the nearest failures, successes and lessons as a prompt block. | Cluster |
-| [`recall`](fieldkit/recall.py) | Reach against a frozen golden set, with the ceiling first: how many targets are in the index at all. | Nothing |
+| [`recall`](fieldkit/recall.py) | Reach and per-question hit rate against a frozen golden set, with the ceiling first: how many targets are in the index at all. | Nothing |
 | [`preflight`](fieldkit/preflight.py) | Probe every dependency before a run. Blocking failures halt; advisory ones degrade honestly. | Nothing |
 | [`approvals`](fieldkit/approvals.py) | Propose, approve, bind: a human approves ids in a text file and code binds only those. | Nothing |
 | [`bridge`](fieldkit/bridge.py) | Queue tool calls that only an interactive connector can make. A headless session fulfils them and the raw result is cached by call. | Nothing |
